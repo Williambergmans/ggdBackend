@@ -24,7 +24,7 @@
            'vraag3Titel'=>$row['vraag3Titel'],
            'vraag4Titel'=>$row['vraag4Titel'],
            'vraag5Titel'=>$row['vraag5Titel'],
-           'template'=>$row['template'],
+           'template'=>$row['template'], 
 
            
            

@@ -79,6 +79,10 @@ Route::get('DeleteVragenlijst/{id}', 'vragenlijstController@delete');
 
 Route::get('test', 'pushwooshController@push');
 
+// opslaan van device id 
+Route::post('postUserData', 'jsonController@saveUserdata');
+//çRoute::get('postUserData', 'jsonController@saveUserdata');
+  
 
 });
 

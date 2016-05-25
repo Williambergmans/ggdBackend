@@ -71,7 +71,7 @@ class jsonController extends Controller
           $vragenlijst->titel  = Input::get('titel', false);
           $vragenlijst->vraag1  = Input::get('vraag1', false);
           $vragenlijst->vraag2  = Input::get('vraag2', false);
-         $vragenlijst->vraag3  = Input::get('vraag3', false);
+          $vragenlijst->vraag3  = Input::get('vraag3', false);
           $vragenlijst->vraag4  = Input::get('vraag4', false);
           $vragenlijst->vraag5  = Input::get('vraag5', false);
           
@@ -95,6 +95,46 @@ class jsonController extends Controller
       //$meldingen = \App\meldingen::all();
         // return view('postMelding', array('meldingen' => $meldingen));
   }
+  
+            public function saveUserdata()
+    {
+                
+                  $userdata = new \App\appusers();
+          $userdata->phoneid  = Input::get('phoneid', false);
+                
+                
+                $user = \App\appusers::where('phoneid', '=',  $userdata->phoneid)->first();
+if ($user === null) {
+   // user doesn't exist
+    
+      
+        
+
+    $data=array(
+         'phoneid'=> $userdata->phoneid
+        
+        );
+    
+        $response= \App\appusers::create($data);
+        if($response)
+        {
+           return response()->json(['phoneid' => '$userdata->phoneid']); 
+        }
+        
+
+    
+    
+    
+}
+                
+                
+        
+   
+  }
+         
+  
+  
+  
          
 
 }

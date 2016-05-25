@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libraries\Pushwoosh;
+use DB;
 
 
 class pushwooshController extends Controller
@@ -18,19 +19,21 @@ class pushwooshController extends Controller
 
     public function push()
     {
-           $device_id = "AD176F1E-AE7C-49DA-B78F-27B8E187D5A8";
-          //$device_id = "B2666CF17D68AEAF";
-   
+           
+       $users = \App\appusers::all();
+
         $pushwoosh = new Pushwoosh();
     try {
       $msg = "Test 123";
-      $pushwoosh->sendMessage($msg, array($device_id));
+       $pushwoosh->sendMessage($msg, $users->pluck('phoneid'));
+      
     } catch (Exception $ex) {
       // Doe iets met exception
         
         //echo $ex;
         console.log($ex);
+        
     }
-       
+   
     }
 }

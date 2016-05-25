@@ -71,12 +71,17 @@ class addCalamiteitController extends Controller
         if($response)
         {
            
-             $device_id = "AD176F1E-AE7C-49DA-B78F-27B8E187D5A8";
+            //ios //$device_id = "AD176F1E-AE7C-49DA-B78F-27B8E187D5A8";
+            //android
+           
+                  $device_id = \App\appusers::all();
+            
+             
    
         $pushwoosh = new Pushwoosh();
     try {
       $msg = $titleName ;
-      $pushwoosh->sendMessage($msg, array($device_id));
+      $pushwoosh->sendMessage($msg, $device_id->pluck('phoneid'));
     } catch (Exception $ex) {
       // Doe iets met exception
         

@@ -12,15 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/William/Sites/ggd/resources/views/editThema.blade.php</file>
-            <file>file:/Users/William/Sites/ggd/app/Http/Controllers/addCalamiteitController.php</file>
-            <file>file:/Users/William/Sites/ggd/resources/views/toevoegencalamiteit.blade.php</file>
-            <file>file:/Users/William/Sites/ggd/app/Http/Controllers/calamiteitenController.php</file>
-            <file>file:/Users/William/Sites/ggd/app/vragenlijst.php</file>
-            <file>file:/Users/William/Sites/ggd/.env</file>
-            <file>file:/Users/William/Sites/ggd/app/Http/routes.php</file>
-            <file>file:/Users/William/Sites/ggd/app/Http/Controllers/vragenlijstController.php</file>
-            <file>file:/Users/William/Sites/ggd/app/Http/Controllers/pushwooshController.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/Http/Controllers/addCalamiteitController.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/Http/routes.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/appusers.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/Http/Controllers/pushwooshController.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/Http/Controllers/jsonController.php</file>
+            <file>file:/Users/William/ggdBackend/ggd/app/Libraries/pushwoosh.inc.php</file>
         </group>
     </open-files>
 </project-private>
