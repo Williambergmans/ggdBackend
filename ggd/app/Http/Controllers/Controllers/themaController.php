@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use DB;
 
-class informatieController extends Controller
+class themaController extends Controller
 {
     
     public function __construct()
@@ -15,25 +15,17 @@ class informatieController extends Controller
     }
 
     
-     public function informatie(){
+     public function thema(){
          
-         $informatie = \App\informatie::all();
-         return view('informatie', array('informatie' => $informatie));
+         $themas = \App\themas::all();
+         return view('themas', array('themas' => $themas));
      }
      
-     public function delete($id)
-     {
-         $i = DB::table('informatie')->where('id',$id)->delete();
-         if ($i > 0 )
-     {
-         return redirect('informatie');
-     }         
-     }
      
      public function edit($id)
      {
-         $row = DB::table('informatie')->where('id',$id)->first();
-         return view('editInformatie')->with('row', $row);
+         $row = DB::table('themainfo')->where('id',$id)->first();
+         return view('editThema')->with('row', $row);
          
      }
      
@@ -54,10 +46,11 @@ class informatieController extends Controller
          'email'=>$emailName,
          'phone'=>$phoneName,
         );
-        $i = DB::table('informatie')->where('id',$id)->update($data);
+    
+        $i = DB::table('themainfo')->where('id',$id)->update($data);
              if($i > 0)
              {
-                 return redirect('informatie');
+                 return redirect('themas');
                  
              }
         

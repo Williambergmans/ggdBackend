@@ -364,38 +364,33 @@
                 <div class="panel-heading">Voeg een calamiteit toe</div>
                 <div class="panel-body">
 
-                    <form action="{{action('calamiteitenController@updateCal')}}" method="post"> 
-                        <input type="hidden" name="id" value="<?= $row->id ?>">
-
+                    <form action="" method="post"> 
                         <div class="form-group">
                             <label for="exampleInputName1">Titel van calamiteit</label>
-                            <input type="text" class="form-control" value="<?= $row->calamiteitTitel ?>" name="titleName" placeholder="Titel van calamiteit">
+                            <input type="text" class="form-control" name="titleName" placeholder="Titel van calamiteit">
                         </div>
+                        <!--
                         <div class="form-group">
                             <label for="exampleInputName2">Omschrijving van calamiteit</label>
-
-                            <textarea name="inhoudName" placeholder="Omschrijving"  class="form-control" rows="5"><?= $row->about ?></textarea> 
-                        </div> 
-
+                            <textarea name="inhoudName" placeholder="Omschrijving" class="form-control" rows="5" id="comment"></textarea> 
+                        </div>
                         <div class="form-group">
-
                             <label for="exampleInputName3">Categorie</label>
                             <select class="form-control" name ="categorieName">
-                                <option selected="selected"><?= $row->categorie ?></option>
                                 <option value="Asbest">Asbest</option>
                                 <option value="Hittegolf">Hittegolf</option>
                                 <option value="InfectieZiekte">InfectieZiekte</option>
                                 <option value="Overige">Overige</option> 
                             </select></div>
+                        -->
                         <div class="form-group">
                             <label for="exampleInputName4">Locatie naam</label>
-                            <input type="text" class="form-control" value="<?= $row->locatie ?>" name="locatieName" placeholder="Locatie">
+                            <input type="text" class="form-control" name="locatieName" placeholder="Locatie">
                         </div>
                         <label for="exampleInputName5">Datum</label>
                         <div class="form-inline">
                             <div class="form-group">
                                 <select class="form-control" name ="dagName">
-                                    <option selected="selected"><?= $row->dag ?></option>
                                     <option value="Maandag">Maandag</option>
                                     <option value="Dinsdag">Dinsdag</option>
                                     <option value="Woendag">Woensdag</option>
@@ -407,7 +402,6 @@
                             <div class="form-group">
 
                                 <select class="form-control" name ="dagGetalName">
-                                    <option selected="selected"><?= $row->dagGetal ?></option>
                                     <option value="01">1</option>
                                     <option value="02">2</option>
                                     <option value="03">3</option> 
@@ -444,7 +438,6 @@
                             <div class="form-group">
                                 <label class="sr-only" for="exampleInputName5">Maand</label>
                                 <select class="form-control" name ="maandName">
-                                    <option selected="selected"><?= $row->maand ?></option>
                                     <option value="Januari">Januari</option>
                                     <option value="Februari">Februari</option>
                                     <option value="Maart">Maart</option>
@@ -459,29 +452,52 @@
                                     <option value="December">December</option> 
                                 </select></div>  
                         </div><br>
+                        <!--
                         <div class="form-group">
                             <label for="exampleInputName8">Start tijd</label>
-                            <input type="text" class="form-control" value="<?= $row->start ?>" name="startName" placeholder="Start">
+                            <input type="text" class="form-control" name="startName" placeholder="Start">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName9">Eind tijd</label>
-                            <input type="text" class="form-control" value="<?= $row->eind ?>" name="eindName" placeholder="Eind">
+                            <input type="text" class="form-control" name="eindName" placeholder="Eind">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName10">Email contactpersoon</label>
-                            <input type="text" class="form-control" value="<?= $row->email ?>" name="emailName" placeholder="Email">
+                            <input type="text" class="form-control" name="emailName" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputName11">Telefoonnummer contactpersoon</label>
-                            <input type="text" class="form-control" value="<?= $row->phone ?>" name="phoneName" placeholder="Telefoonnummer">
+                            <label for="exampleInputName11">Telefoonnummer</label>
+                            <input type="text" class="form-control" name="phoneName" placeholder="Telefoonnummer">
                         </div>
+
                         <div class="form-group">
                             <label for="exampleInputName12">Wat te doen bij calamiteit</label>
-                            <textarea name="omschrijvingName" placeholder="Omschrijving" class="form-control" rows="5" id="comment"><?= $row->omschrijving ?></textarea> 
+                            <textarea name="omschrijvingName" placeholder="Omschrijving" class="form-control" rows="5" id="comment"></textarea>
                         </div>
+                        -->
                         <div class="form-group">
                             <label for="exampleInputName15">Afbeelding Url</label>
-                            <input type="text" class="form-control" value="<?= $row->photo ?>" name="photoName" placeholder="Photo">
+                            <input type="text" class="form-control" name="photoName" placeholder="Afbeelding">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputName16">Vraag 1</label>
+                            <input type="text" class="form-control" name="vraag1Name" placeholder="vraag1Titel">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputName17">Vraag 2</label>
+                            <input type="text" class="form-control" name="vraag2Name" placeholder="vraag2Titel">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputName18">Vraag 3</label>
+                            <input type="text" class="form-control" name="vraag3Name" placeholder="vraag3Titel">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputName19">Vraag 4</label>
+                            <input type="text" class="form-control" name="vraag4Name" placeholder="vraag4Titel">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputName20">Vraag 5</label>
+                            <input type="text" class="form-control" name="vraag5Name" placeholder="vraag5Titel">
                         </div>
 
                         <input type="hidden" class="form-control" value="calamiteitTemplate" name="templateName">
@@ -499,20 +515,19 @@
                         <div id="us3" style="width: 550px; height: 400px;"></div> 
                         <div class="clearfix">&nbsp;</div>
 
-                        <input type="hidden" class="form-control" name="latitudeName" id="us3-lat"  value="<?= $row->latitude ?>" />
+                        <input type="hidden" class="form-control" name="latitudeName" id="us3-lat" />
 
+                        <input type="hidden" class="form-control" name="longitudeName" id="us3-lon" />
 
-                        <input type="hidden" class="form-control"  name="longitudeName" id="us3-lon" value="<?= $row->longitude ?>" />
-
-                        <input type="hidden" class="form-control" value="calamiteitTemplate" id="templateName" name="templateName"> 
+                        <input type="hidden" class="form-control" value="vragenlijstTemplate" id="templateName" name="templateName"> 
 
 
                         <div class="clearfix"></div>
                         <script>
                             $('#us3').locationpicker({
                                 location: {
-                                    latitude: <?= $row->latitude ?>,
-                                    longitude: <?= $row->longitude ?>
+                                    latitude: 51.4388648,
+                                    longitude: 5.473207000000002
                                 },
                                 radius: 300,
                                 inputBinding: {
@@ -529,9 +544,6 @@
                             });
                         </script>
 
-
-
-
                         <input type="hidden" class="form-control" class="form-control" name="_token" value="{{ csrf_token() }}">
                         <input type="submit"  class="btn btn-primary" value="Save">
                     </form> 
@@ -540,6 +552,6 @@
             </div>
         </div>
     </div>
-</div> 
-@endsection
+
+    @endsection
 

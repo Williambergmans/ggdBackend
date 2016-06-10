@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Calamiteiten
-                    <a class="pull-right" href="<?php echo 'toevoegencalamiteit' ?>">Voeg calamiteit toe</a>
+                <div class="panel-heading">Verzonden vragenlijsten
+                    <a class="pull-right" href="<?php echo 'nieuwvragenlijst' ?>">Maak nieuwe vragenlijst</a>
                 </div>
                 <div class="list-group">
                     @foreach ($calamiteiten as $row)
@@ -32,9 +32,9 @@
                                 <span>{{ $row->locatie }} </span>
                             </div>
                             <div class="space">   
-                                <span><a href="<?php echo 'EditCalamiteit/' . $row->id ?>" class="btn btn-info" role="button">Pas aan</a></span>
-                                <span><a href="<?php echo 'DeleteCalamiteit/' . $row->id ?>" class="btn btn-info" role="button">Verwijder</a></span>
-                                 <span><a href="<?php echo 'toevoegenvragenlijst/' . $row->id ?>" class="btn btn-info" role="button">Maak vragenlijst</a></span> 
+                                <span><a href="<?php echo 'editVragenlijst/' . $row->id ?>" class="btn btn-info" role="button">Pas aan</a></span>
+                                <span><a href="<?php echo 'deleteLijst/' . $row->id ?>" class="btn btn-info" role="button">Verwijder</a></span>
+
                             </div>
                           
                         </div>

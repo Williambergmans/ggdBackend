@@ -45,6 +45,13 @@
        .navbar-default .navbar-nav > li > a {
         color: #192d52;
        }
+       .wideInput{
+    
+    height: 200px;
+
+  
+    
+}
         
     </style>
 </head>
@@ -72,10 +79,11 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/calamiteiten') }}">Calamiteiten</a></li>
+                    <li><a href="{{ url('/vragenlijsten') }}">Vragenlijsten</a></li>
                     <li><a href="{{ url('/meldingen') }}">Meldingen</a></li>
                     <li><a href="{{ url('/informatie') }}">Informatie</a></li>
                      <li><a href="{{ url('/themas') }}">Hoofdthema's</a></li>
-                     <li><a href="{{ url('/vragenlijst') }}">Vragenlijsten</a></li>
+                     <li><a href="{{ url('/vragenlijst') }}">Ontvangen vragenlijsten</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

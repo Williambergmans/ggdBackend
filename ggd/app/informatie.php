@@ -8,4 +8,5 @@ class informatie extends Model
 {
     // Removes the 's' in the end from table name '
     protected $table = 'informatie';
+    protected $fillable = ['titel','info','photo','email','phone'];
 }

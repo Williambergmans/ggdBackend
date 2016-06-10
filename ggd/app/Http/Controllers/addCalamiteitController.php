@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use App\addCal;
+use DB;
 
 Use App\Libraries\Pushwoosh;
 
@@ -17,8 +18,8 @@ class addCalamiteitController extends Controller
     public function addCalamiteit()
     {
       return view('toevoegencalamiteit');
-  
-    }
+    } 
+    
     
     public function save()
     {
@@ -26,6 +27,7 @@ class addCalamiteitController extends Controller
          $omschrijvingName=Input::get('omschrijvingName');
          $categorieName=Input::get('categorieName');
          $locatieName=Input::get('locatieName');
+         $adresName=Input::get('adresName');
          $maandName=Input::get('maandName');
          $dagName=Input::get('dagName');
          $dagGetalName=Input::get('dagGetalName');
@@ -37,17 +39,13 @@ class addCalamiteitController extends Controller
          $latitudeName=Input::get('latitudeName');
          $longitudeName=Input::get('longitudeName');
          $photoName=Input::get('photoName');
-         $vraag1Name=Input::get('vraag1Name');
-         $vraag2Name=Input::get('vraag2Name');
-         $vraag3Name=Input::get('vraag3Name');
-         $vraag4Name=Input::get('vraag4Name');
-         $vraag5Name=Input::get('vraag5Name');
          $templateName=Input::get('templateName');
     $data=array(
          'calamiteitTitel'=>$titleName,
          'omschrijving'=>$omschrijvingName,
          'categorie'=>$categorieName,
          'locatie'=>$locatieName,
+         'adres'=>$adresName,
          'maand'=>$maandName,
          'dag'=>$dagName,
          'dagGetal'=>$dagGetalName,
@@ -59,38 +57,68 @@ class addCalamiteitController extends Controller
          'latitude'=>$latitudeName,
          'longitude'=>$longitudeName,
          'photo'=>$photoName,
-         'vraag1Titel'=>$vraag1Name,
-         'vraag2Titel'=>$vraag2Name,
-         'vraag3Titel'=>$vraag3Name,
-         'vraag4Titel'=>$vraag4Name,
-         'vraag5Titel'=>$vraag5Name,
-         'templates'=>$templateName,
-           
+         'template'=>$templateName,
         );
         $response=addCal::create($data);
+        
+        function getDistance( $latitude1, $longitude1, $latitude2, $longitude2 ) {  
+    $earth_radius = 6371;
+
+    $dLat = deg2rad( $latitude2 - $latitude1 );  
+    $dLon = deg2rad( $longitude2 - $longitude1 );  
+
+    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);  
+    $c = 2 * asin(sqrt($a));  
+    $d = $earth_radius * $c;  
+
+    return $d;  
+}
+
         if($response)
         {
-           
-            //ios //$device_id = "AD176F1E-AE7C-49DA-B78F-27B8E187D5A8";
-            //android
-           
-                  $device_id = \App\appusers::all();
             
-             
-   
-        $pushwoosh = new Pushwoosh();
-    try {
-      $msg = $titleName ;
-      $pushwoosh->sendMessage($msg, $device_id->pluck('phoneid'));
-    } catch (Exception $ex) {
-      // Doe iets met exception
+               $user = \App\appusers::all();
+           
+
+            for ($a = 0; $a < count($user); $a++) {
+                
+                
+            $lat1 = $user[$a]->userlat;
+            $long1 = $user[$a]->userlong;
+            
+            echo $lat1;
+            echo $long1;
+                
+
+                $distance = getDistance($lat1, $long1, $latitudeName, $longitudeName) * 1000;
+
+
+                if ($distance < $user[$a]->distance) {
+
+                    $device_id = $user[$a]->phoneid;
+
+                    $pushwoosh = new Pushwoosh();
+                    try {
+
+                         $msg = "Melding: " . $titleName;
+                       
+                        $pushwoosh->sendMessage($msg, $device_id);
+                    } catch (Exception $ex) {
+                        // Doe iets met exception
+                        //echo $ex;
+                        console . log($ex);
+                    }
+                }
+            }
+            
+            
         
-        //echo $ex;
-        console.log($ex);
-    }
-            return redirect()->back();
+            //return redirect()->back();
+           return redirect('calamiteiten');
        
         }
+        
+        
 
     }
     

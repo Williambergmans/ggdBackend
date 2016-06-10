@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-md-6">
                             <h4 class="list-group-item-heading"> {{ $row->titel }} </h4>
-                            <p class="list-group-item-text">{{ $row->info }}
+                            <p class="list-group-item-text">{{  str_limit($row->info, 400) }}
                             </p>
                         </div>
                         <div class="col-md-3 ">

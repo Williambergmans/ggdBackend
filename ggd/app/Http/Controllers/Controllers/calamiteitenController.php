@@ -42,6 +42,11 @@ class calamiteitenController extends Controller {
         $latitudeName = Input::get('latitudeName');
         $longitudeName = Input::get('longitudeName');
         $photoName = Input::get('photoName');
+        $vraag1Name = Input::get('vraag1Name');
+        $vraag2Name = Input::get('vraag2Name');
+        $vraag3Name = Input::get('vraag3Name');
+        $vraag4Name = Input::get('vraag4Name');
+        $vraag5Name = Input::get('vraag5Name');
         $templateName = Input::get('templateName');
         $data = array(
             'id' => $id,
@@ -60,6 +65,11 @@ class calamiteitenController extends Controller {
             'latitude' => $latitudeName,
             'longitude' => $longitudeName,
             'photo' => $photoName,
+            'vraag1Titel' => $vraag1Name,
+            'vraag2Titel' => $vraag2Name,
+            'vraag3Titel' => $vraag3Name,
+            'vraag4Titel' => $vraag4Name,
+            'vraag5Titel' => $vraag5Name,
             'template' => $templateName,
             'updated_at' => Carbon\Carbon::now(),
         );
@@ -119,13 +129,14 @@ class calamiteitenController extends Controller {
                     }
                 }
             }
+            exit();
             return redirect('calamiteiten');
         }
     }
 
     public function calamiteiten() {
 
-         $calamiteiten = \App\calamiteiten::where('template', '=', "calamiteitTemplate")->get();
+        $calamiteiten = \App\calamiteiten::all();
         return view('calamiteiten', array('calamiteiten' => $calamiteiten));
         // return View::make('calamiteiten')->with('calamiteit_list',  calamiteiten::all());
     }

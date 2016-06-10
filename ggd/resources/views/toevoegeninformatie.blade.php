@@ -10,12 +10,8 @@
                    
                    <form action="" method="post"> 
             <input type="text" class="form-control" name="titleName" placeholder="Titel van calamiteit"><br>
-            <input type="textarea" class="form-control"rows="5" name="infoName" placeholder="Informatie"><br>
-               <select class="form-control" name ="categorieName">
-                            <option value="InfectieZiekte">InfectieZiekte</option>
-                            <option value="Hittegolf">Hittegolf</option>
-                            <option value="Overige">Overige</option> 
-                        </select><br>
+            <!--<input type="textarea" class="form-control"rows="5" name="infoName" placeholder="Informatie"><br>-->
+            <textarea name="infoName" placeholder="Informatie" class="form-control" rows="5" id="comment"></textarea><br> 
              <input type="text" class="form-control" name="photoName" placeholder="Photo url"><br>
              <input type="text" class="form-control" name="emailName" placeholder="Email voor contact"><br>
                <input type="text" class="form-control" name="phoneName" placeholder="Nummer voor contact"><br>

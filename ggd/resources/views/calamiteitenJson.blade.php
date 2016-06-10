@@ -24,14 +24,16 @@
            'vraag3Titel'=>$row['vraag3Titel'],
            'vraag4Titel'=>$row['vraag4Titel'],
            'vraag5Titel'=>$row['vraag5Titel'],
-           'template'=>$row['template'], 
+           'template'=>$row['template'],
+           'updated_at'=>$row['updated_at'],
 
            
-           
        );
+       
+       
    
 ?>
-     @endforeach
+     @endforeach 
 <?php
 echo json_encode(array( 'calamiteiten'  =>   $json ),JSON_UNESCAPED_SLASHES);
 

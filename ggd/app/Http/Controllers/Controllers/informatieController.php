@@ -54,6 +54,7 @@ class informatieController extends Controller
          'email'=>$emailName,
          'phone'=>$phoneName,
         );
+    
         $i = DB::table('informatie')->where('id',$id)->update($data);
              if($i > 0)
              {

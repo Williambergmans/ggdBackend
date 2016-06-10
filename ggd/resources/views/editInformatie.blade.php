@@ -17,7 +17,8 @@
                    <form action="{{action('informatieController@update')}}" method="post"> 
                         <input type="hidden" name="id" value="<?= $row->id ?>">
             <input type="text" class="form-control" name="titleName" value="<?= $row->titel ?>"  placeholder="Titel van calamiteit"><br>
-            <input type="textarea" class="form-control"rows="5" value="<?= $row->info ?>" name="infoName" placeholder="Informatie"><br>
+            <!--<input type="textarea" placeholder="Informatie"class="form-control"rows="5" value="<?= $row->info ?>" name="infoName" placeholder="Informatie">-->
+             <textarea name="infoName" class="form-control" rows="5" id="comment"><?= $row->info ?></textarea><br> 
              <input type="text" class="form-control" value="<?= $row->photo ?>" name="photoName" placeholder="Photo url"><br>
              <input type="text" class="form-control" value="<?= $row->email ?>" name="emailName" placeholder="Email voor contact"><br>
                <input type="text" class="form-control" value="<?= $row->phone ?>" name="phoneName" placeholder="Nummer voor contact"><br>
@@ -26,7 +27,7 @@
            
             <input type="submit"  class="btn btn-primary" value="Sla op"> 
         </form> 
-                    
+                       
                 </div>
             </div>
         </div>
