@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+  /**
+   * model for showing vragenlijsten
+   */
+
 class vragenlijst extends Model
 {
     protected $table = 'vragenlijst';

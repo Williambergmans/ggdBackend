@@ -17,7 +17,7 @@
                                 <img class="media-object img-rounded img-responsive imagesize" style="width:100%; height:auto;" src="{{ $row->photo }}" alt="placehold.it/350x250" >
                             </figure>
                         </div>
-                        <div class="col-md-6">
+                        <div class="bottom col-md-6">
                             <h4 class="list-group-item-heading"> {{ $row->calamiteitTitel }} </h4>
                             <p class="list-group-item-text">{{  str_limit($row->about, 400) }}
                             </p>

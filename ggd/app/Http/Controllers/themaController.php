@@ -8,20 +8,20 @@ use DB;
 
 class themaController extends Controller
 {
-    
+    // check if user is admin
     public function __construct()
     {
         $this->middleware('isAdmin');
     }
 
-    
+         // function that returns an view thema data
      public function thema(){
          
          $themas = \App\themas::all();
          return view('themas', array('themas' => $themas));
      }
      
-     
+      // function that returns an view where you can edit theme data
      public function edit($id)
      {
          $row = DB::table('themainfo')->where('id',$id)->first();
@@ -29,6 +29,7 @@ class themaController extends Controller
          
      }
      
+   // post function for updating theme data
       public function update()
     {
          $id=Input::get('id');
@@ -47,9 +48,12 @@ class themaController extends Controller
          'phone'=>$phoneName,
         );
     
+        // send data to database
         $i = DB::table('themainfo')->where('id',$id)->update($data);
+        // if data is send
              if($i > 0)
              {
+                 // return to thema page
                  return redirect('themas');
                  
              }

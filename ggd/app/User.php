@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+    /**
+     *  model for login backend
+     */
+
 class User extends Authenticatable
 {
     /**

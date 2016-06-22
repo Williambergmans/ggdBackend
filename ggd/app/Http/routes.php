@@ -1,97 +1,131 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+  |--------------------------------------------------------------------------
+  | Application Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register all of the routes for an application.
+  | It's a breeze. Simply tell Laravel the URIs it should respond to
+  | and give it the controller to call when that URI is requested.
+  |
+ */
 
 Route::group(['middleware' => 'web'], function () {
-    
-    
-Route::auth();
 
-Route::get('access', function(){
-            
-            echo 'You have access';
-            
-        })->middleware('isAdmin');
-
-          Route::get('access', function(){
-            
-            echo 'You have access';
-            
-        })->middleware('auth');
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-exec('composer dump-autoload');
-
-Route::get('/home', 'HomeController@index');
-
-Route::get('calamiteiten', 'calamiteitenController@calamiteiten'); 
-Route::get('DeleteCalamiteit/{id}', 'calamiteitenController@delete');
-Route::get('EditCalamiteit/{id}', 'calamiteitenController@edit');
-Route::post('updateCal', 'calamiteitenController@updateCal');
-Route::get('toevoegencalamiteit', 'addCalamiteitController@addCalamiteit');
-Route::post('toevoegencalamiteit', 'addCalamiteitController@save');
-
-Route::post('toevoegenvragenlijst/{id}', 'vragenlijstController@save');
-Route::get('toevoegenvragenlijst/{id}', 'vragenlijstController@add');
-Route::get('vragenlijsten', 'vragenlijstController@vragenlijsten');
-Route::get('editVragenlijst/{id}', 'vragenlijstController@editLijst');
-Route::post('updateLijst', 'vragenlijstController@updateLijst');
-Route::get('deleteLijst/{id}', 'vragenlijstController@deleteLijst');
-Route::post('updateVraag', 'vragenlijstController@updateVraag');
-Route::get('nieuwvragenlijst', 'vragenlijstController@addVragenlijst');
-Route::post('nieuwvragenlijst', 'vragenlijstController@saveNieuw');
+// every route in this group has to be checked for authorization
+   Route::auth();
 
 
+//for some pages you have to be admin 
+    Route::get('access', function() {
 
-Route::get('meldingen', 'meldingenController@meldingen');
-Route::get('DeleteMelding/{id}','meldingenController@delete');
+        echo 'You have access';
+    })->middleware('isAdmin');
 
-Route::get('informatie', 'informatieController@informatie');
-Route::get('DeleteInformatie/{id}', 'informatieController@delete');
-Route::get('EditInformatie/{id}', 'informatieController@edit');
-Route::post('updateInfo', 'informatieController@update');
-Route::get('toevoegeninformatie', 'addInformatieController@addInformatie');
-Route::post('toevoegeninformatie', 'addInformatieController@save');
+//for some pages you have to be logged in
+    Route::get('access', function() {
 
-Route::get('themas', 'themaController@thema');
-Route::get('EditThema/{id}', 'themaController@edit');
-Route::post('updateTheme', 'themaController@update');
+        echo 'You have access';
+    })->middleware('auth');
 
-Route::get('calamiteitenJson', 'jsonController@calamiteiten');
+    // returns welcome screen
+    Route::get('/', function () {
+        return view('welcome');
+    });
+// used to add pushwoosh script
+    exec('composer dump-autoload');
 
-Route::get('themaJson', 'jsonController@themas');
+// show index page
+    Route::get('/home', 'HomeController@index');
 
-Route::get('informatieJson', 'jsonController@informatie');
-Route::post('postMelding', 'jsonController@save');
-//Route::get('postMelding', 'jsonController@save'); 
-Route::post('postVragenlijst', 'jsonController@saveVragenlijst');
-//Route::get('postVragenlijst', 'jsonController@saveVragenlijst');
- 
-Route::get('vragenlijst', 'vragenlijstController@vragenlijst');
-Route::get('DeleteVragenlijst/{id}', 'vragenlijstController@delete');
+// show calamiteiten page
+    Route::get('calamiteiten', 'calamiteitenController@calamiteiten');
+// delete calamiteit by id
+    Route::get('DeleteCalamiteit/{id}', 'calamiteitenController@delete');
+// edit calamiteit by id
+    Route::get('EditCalamiteit/{id}', 'calamiteitenController@edit');
+// update calamiteit
+    Route::post('updateCal', 'calamiteitenController@updateCal');
+// show toevoegencalamiteit page
+    Route::get('toevoegencalamiteit', 'addCalamiteitController@addCalamiteit');
+// add new calamiteit
+    Route::post('toevoegencalamiteit', 'addCalamiteitController@save');
 
-Route::get('test', 'pushwooshController@push');
+// post vragenlijst of excisting calamiteit
+    Route::post('toevoegenvragenlijst/{id}', 'vragenlijstController@save');
+// add vragenlijst in calamiteit page
+    Route::get('toevoegenvragenlijst/{id}', 'vragenlijstController@add');
+// show all send vragenlijsten
+    Route::get('vragenlijsten', 'vragenlijstController@vragenlijsten');
+// show edit vragenlijst page
+    Route::get('editVragenlijst/{id}', 'vragenlijstController@editLijst');
+// Update vragenlijst
+    Route::post('updateLijst', 'vragenlijstController@updateLijst');
+// delete vragenlijst
+    Route::get('deleteLijst/{id}', 'vragenlijstController@deleteLijst');
+// post Updated vragenlijst
+    Route::post('updateVraag', 'vragenlijstController@updateVraag');
+// show add new vragenlijst page
+    Route::get('nieuwvragenlijst', 'vragenlijstController@addVragenlijst');
+// post new vragenlijst
+    Route::post('nieuwvragenlijst', 'vragenlijstController@saveNieuw');
 
-// opslaan van device id 
-Route::post('postUserData', 'jsonController@saveUserdata');
-Route::post('updateUserData', 'jsonController@updateUserdata');
-Route::get('updateUserData', 'jsonController@updateUserdata');
+
+// show meldingen from app users page
+    Route::get('meldingen', 'meldingenController@meldingen');
+// show meldingen details page
+    Route::get('meldingDetails/{id}', 'meldingenController@details');  
+// delete meldingen from users
+    Route::get('DeleteMelding/{id}', 'meldingenController@delete');
+// show informatie page
+    Route::get('informatie', 'informatieController@informatie');
+// delete informatie by id
+    Route::get('DeleteInformatie/{id}', 'informatieController@delete');
+// show edit informatie page by id
+    Route::get('EditInformatie/{id}', 'informatieController@edit');
+// update information
+    Route::post('updateInfo', 'informatieController@update');
+// show add informatie page
+    Route::get('toevoegeninformatie', 'addInformatieController@addInformatie');
+// post new informatie
+    Route::post('toevoegeninformatie', 'addInformatieController@save');
+
+// show thema page
+    Route::get('themas', 'themaController@thema');
+// show edit thema by id page
+    Route::get('EditThema/{id}', 'themaController@edit');
+// update theme data
+    Route::post('updateTheme', 'themaController@update');
+// show calamiteiten api
+    Route::get('calamiteitenJson', 'jsonController@calamiteiten');
+// show thema api
+    Route::get('themaJson', 'jsonController@themas');
+// show informatie api
+    Route::get('informatieJson', 'jsonController@informatie');
+
+
+// post melding in app
+    Route::post('postMelding', 'jsonController@save');
+
+// post vragenlijst in app
+    Route::post('postVragenlijst', 'jsonController@saveVragenlijst');
+
+// show vragenlijst page
+    Route::get('vragenlijst', 'vragenlijstController@vragenlijst');
+// delete vragenlijst by id
+    Route::get('DeleteVragenlijst/{id}', 'vragenlijstController@delete');
+// sends notification test
+//Route::get('test', 'pushwooshController@push');
+// post  device id 
+    Route::post('postUserData', 'jsonController@saveUserdata');
+// post location and distance setting of user
+    Route::post('updateUserData', 'jsonController@updateUserdata');
+
+//Route::get('updateUserData', 'jsonController@updateUserdata');
 //çRoute::get('postUserData', 'jsonController@saveUserdata');
-  
 });
 
- 
+
 
 

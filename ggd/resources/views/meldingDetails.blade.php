@@ -24,15 +24,15 @@
                 radius: options.radius,
                 locationName: options.locationName,
                 addressComponents: {
-                    formatted_address: null,
+                   // formatted_address: null,
                     addressLine1: null,
-                    addressLine2: null,
+                  ///  addressLine2: null,
                     streetName: null,
-                    streetNumber: null,
+                   // streetNumber: null,
                     city: null,
-                    district: null,
-                    state: null,
-                    stateOrProvince: null
+                 //   district: null,
+                   // state: null,
+                   // stateOrProvince: null
                 },
                 settings: options.settings,
                 domContainer: domElement,
@@ -94,24 +94,33 @@
                 var result = {};
                 for (var i = address_components.length - 1; i >= 0; i--) {
                     var component = address_components[i];
+                    
+                    /*
                     if (component.types.indexOf("postal_code") >= 0) {
                         result.postalCode = component.short_name;
                     } else if (component.types.indexOf("street_number") >= 0) {
                         result.streetNumber = component.short_name;
-                    } else if (component.types.indexOf("route") >= 0) {
+                    } else 
+            */            
+            if (component.types.indexOf("route") >= 0) {
                         result.streetName = component.short_name;
                     } else if (component.types.indexOf("locality") >= 0) {
                         result.city = component.short_name;
-                    } else if (component.types.indexOf("sublocality") >= 0) {
+                    } 
+            /*        
+            else if (component.types.indexOf("sublocality") >= 0) {
                         result.district = component.short_name;
-                    } else if (component.types.indexOf("administrative_area_level_1") >= 0) {
+                    } 
+            /*        
+            else if (component.types.indexOf("administrative_area_level_1") >= 0) {
                         result.stateOrProvince = component.short_name;
                     } else if (component.types.indexOf("country") >= 0) {
                         result.country = component.short_name;
                     }
+                    */
                 }
-                result.addressLine1 = [result.streetNumber, result.streetName].join(" ").trim();
-                result.addressLine2 = "";
+                result.addressLine1 = [result.streetName, result.city].join(" ").trim();
+               // result.addressLine2 = "";
                 return result;
             }
         };
@@ -334,8 +343,8 @@
                 latitude: 40.7324319,
                 longitude: -73.82480777777776
             },
-            locationName: "",
-            radius: 500,
+             locationName: "",
+
             zoom: 15,
             scrollwheel: true,
             inputBinding: {
@@ -347,7 +356,7 @@
             enableAutocomplete: false,
             enableAutocompleteBlur: false,
             enableReverseGeocode: true,
-            draggable: true,
+            draggable: false,
             onchanged: function (currentLocation, radius, isMarkerDropped) {},
             onlocationnotfound: function (locationName) {},
             oninitialized: function (component) {},
@@ -361,73 +370,55 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Voeg een calamiteit toe</div>
-                <div class="panel-body">
-
-                    <form action="{{action('vragenlijstController@updateVraag')}}" method="post"> 
-                        <input type="hidden" name="id" value="<?= $row->id ?>">
-                        <div class="form-group">
-                            <label for="exampleInputName1">Titel van calamiteit</label>
-                            <input type="text" class="form-control"  value="<?= $row->calamiteitTitel ?>" name="titleName" placeholder="Titel van calamiteit">
+                <div class="panel-heading">Melding details</div>
+                <div class="list-group">
+                    <div class="list-group-item">              
+                        <div class="row">
+                            <div class="media col-md-12">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Titel</th>
+                                            <th>Categorie</th>
+                                            <th>E-mail</th>
+                                            <th>Datum</th>
+                                            <th>Telefoon nummer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <td>{{ $row->titel }}</td>
+                                    <td>{{ $row->categorie }}</td>
+                                    <td>{{ $row->mail }}</td>
+                                    <td>{{ $row->created_at }}</td>
+                                    <td>{{ $row->phone }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputName15">Afbeelding Url</label>
-                            <input type="text" class="form-control" value="<?= $row->photo ?>" name="photoName" placeholder="Photo">
+                        <div class="row">
+                            <div class="media col-md-12">
+                                <h4>Inhoud:</h4>
+                                <p>{{ $row->inhoud }}</p>
+                            </div>
                         </div>
-                          <div class="form-group">
-                            <label for="exampleInputName4">Locatie naam</label>
-                            <input type="text" class="form-control" value="<?= $row->locatie ?>" name="locatieName" placeholder="Locatie">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName16">Vraag 1</label>
-                            <input type="text" class="form-control" value="<?= $row->vraag1Titel ?>" name="vraag1Name" placeholder="vraag1Titel">
-                        </div> 
-                        <div class="form-group">
-                            <label for="exampleInputName17">Vraag 2</label>
-                            <input type="text" class="form-control" value="<?= $row->vraag2Titel ?>" name="vraag2Name" placeholder="vraag2Titel">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName17">Vraag 3</label>
-                            <input type="text" class="form-control" value="<?= $row->vraag3Titel ?>" name="vraag3Name" placeholder="vraag3Titel">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName17">Vraag 4</label>
-                            <input type="text" class="form-control" value="<?= $row->vraag4Titel ?>" name="vraag4Name" placeholder="vraag4Titel">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName17">Vraag 5</label>
-                            <input type="text" class="form-control" value="<?= $row->vraag5Titel ?>" name="vraag5Name" placeholder="vraag5Titel">
-                        </div>
-                        
-                         <div class="form-group">
-                            <label for="exampleInputName22">Map locatie:</label>
-                            <input type="text" class="form-control" id="us3-address" />
-                        </div> 
+                        <div class="row">
+                            <div class="col-md-12">
 
-                        <div class="form-group">
-                            <label for="exampleInputName23">Radius:</label>
-                            <input type="text" class="form-control" id="us3-radius" />
-                        </div>
-
-                        <div id="us3" style="width: 100%; height: 400px;"></div> 
-                        <div class="clearfix">&nbsp;</div>
-
-                        <input type="hidden" class="form-control" name="latitudeName" id="us3-lat"  value="<?= $row->latitude ?>" />
-
-
-                        <input type="hidden" class="form-control"  name="longitudeName" id="us3-lon" value="<?= $row->longitude ?>" />
-
-                        <input type="hidden" class="form-control" value="calamiteitTemplate" id="templateName" name="templateName"> 
-
-
-                        <div class="clearfix"></div>
-                        <script>
-                            $('#us3').locationpicker({
+                                <input type="hidden" class="form-control" name="adresName" id="us3-address" />
+                                <input type="hidden" class="form-control" id="us3-radius"  />
+                                <input type="hidden" class="form-control" name="latitudeName" value="{{ $row->longitude }}" id="us3-lat" />
+                                <input type="hidden" class="form-control" name="longitudeName" value="{{ $row->latitude }}" id="us3-lon" /> 
+                                <h4>Locatie:</h4><p></p>
+                          
+                                <div id="us3" style="width: 100%; height: 500px;"></div>                       
+                                <script>
+                                   $('#us3').locationpicker({
                                 location: {
                                     latitude: <?= $row->latitude ?>,
                                     longitude: <?= $row->longitude ?>
                                 },
-                                radius: 300,
+    
                                 inputBinding: {
                                     latitudeInput: $('#us3-lat'),
                                     longitudeInput: $('#us3-lon'),
@@ -440,18 +431,18 @@
                                     //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
                                 }
                             });
-                        </script>
-                        
-                        
+                                </script>
+                            </div>
+                        </div>
 
-                        <input type="hidden" class="form-control"  name="_token" value="{{ csrf_token() }}">
-                        <input type="submit"  class="btn btn-primary" value="Save">
-                    </form> 
+
+
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endsection
 

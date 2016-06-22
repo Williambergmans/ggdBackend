@@ -6,7 +6,7 @@ use App\Libraries\Pushwoosh;
 use DB;
 
 
-class pushwooshController extends Controller
+class pushwooshController extends Controller 
 {
 
     /**
@@ -16,12 +16,12 @@ class pushwooshController extends Controller
      */
     
     
-
+    // test function 
     public function push()
     {
-           
+       // get all users    
        $users = \App\appusers::all();
-
+        
         $pushwoosh = new Pushwoosh();
     try {
       $msg = "Test 123";

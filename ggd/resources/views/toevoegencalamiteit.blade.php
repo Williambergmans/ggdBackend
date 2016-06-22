@@ -492,7 +492,7 @@
                             <input type="text" class="form-control" id="us3-radius" />
                         </div>
 
-                        <div id="us3" style="width: 550px; height: 400px;"></div> 
+                        <div id="us3" style="width: 100%; height: 400px;"></div> 
                         <div class="clearfix">&nbsp;</div>
                        
                             <input type="hidden" class="form-control" name="latitudeName" id="us3-lat" />

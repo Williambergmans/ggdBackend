@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+  /**
+   * model for adding calamiteiten
+   */
 class addCal extends Model
 {
      protected $table = 'calamiteiten';

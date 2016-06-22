@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+  /**
+   * app user model
+   */
+
 class appusers extends Model
 {
      protected $table = 'appusers';

@@ -9,10 +9,12 @@ use Carbon;
 
 class calamiteitenController extends Controller {
 
+    // check if user is admin
     public function __construct() {
         $this->middleware('isAdmin');
     }
 
+    // delete calamiteit by id
     public function delete($id) {
         $i = DB::table('calamiteiten')->where('id', $id)->delete();
         if ($i > 0) {
@@ -20,11 +22,13 @@ class calamiteitenController extends Controller {
         }
     }
 
+    // show edit calamiteit page by id
     public function edit($id) {
         $row = DB::table('calamiteiten')->where('id', $id)->first();
         return view('editCalamiteit')->with('row', $row);
     }
 
+    // update calamiteit function
     public function updateCal() {
         $id = Input::get('id');
         $titleName = Input::get('titleName');
@@ -64,6 +68,7 @@ class calamiteitenController extends Controller {
             'updated_at' => Carbon\Carbon::now(),
         );
 
+        // function that calculates the distance between two locations
         function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
             $earth_radius = 6371;
 
@@ -77,40 +82,41 @@ class calamiteitenController extends Controller {
             return $d;
         }
 
+        // save edited data to database
         $i = DB::table('calamiteiten')->where('id', $id)->update($data);
+        // if saved
         if ($i > 0) {
-
-
+            // get all userdata from model
             $user = \App\appusers::all();
-           
 
+            // loop through userdata
             for ($a = 0; $a < count($user); $a++) {
-                
-                
-            $lat1 = $user[$a]->userlat;
-            $long1 = $user[$a]->userlong;
-            
-            echo $lat1;
-            echo $long1;
-                
 
+                // loop through location data
+                $lat1 = $user[$a]->userlat;
+                $long1 = $user[$a]->userlong;
+
+                //echo $lat1;
+                //echo $long1;
+                // calculate distance between user location and calamiteit location 
+                // $distance in meters
                 $distance = getDistance($lat1, $long1, $latitudeName, $longitudeName) * 1000;
 
-
+                // if distance is smaller than distance setting of user, send an notification
                 if ($distance < $user[$a]->distance) {
 
-                    $device_id = $user[$a]->phoneid;
+                    $device_id = $user[$a]->phoneid; 
 
                     $pushwoosh = new Pushwoosh();
                     try {
-
+                         // check template 
                         if ($templateName == "calamiteitTemplate") {
 
                             $msg = "Update: " . $titleName;
                         } else {
                             $msg = "Vragenlijst: " . $titleName;
                         }
-
+                        // verzend notificatie
                         $pushwoosh->sendMessage($msg, $device_id);
                     } catch (Exception $ex) {
                         // Doe iets met exception
@@ -119,15 +125,15 @@ class calamiteitenController extends Controller {
                     }
                 }
             }
+            // return to calamiteiten page
             return redirect('calamiteiten');
         }
     }
 
     public function calamiteiten() {
 
-         $calamiteiten = \App\calamiteiten::where('template', '=', "calamiteitTemplate")->get();
+        $calamiteiten = \App\calamiteiten::where('template', '=', "calamiteitTemplate")->get();
         return view('calamiteiten', array('calamiteiten' => $calamiteiten));
-        // return View::make('calamiteiten')->with('calamiteit_list',  calamiteiten::all());
     }
 
 }

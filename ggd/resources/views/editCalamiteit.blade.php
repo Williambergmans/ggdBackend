@@ -487,7 +487,7 @@
                         <input type="hidden" class="form-control" value="calamiteitTemplate" name="templateName">
 
                         <div class="form-group">
-                            <label for="exampleInputName22">Location:</label>
+                            <label for="exampleInputName22">Map locatie:</label>
                             <input type="text" class="form-control" id="us3-address" />
                         </div>
 
@@ -496,7 +496,7 @@
                             <input type="text" class="form-control" id="us3-radius" />
                         </div>
 
-                        <div id="us3" style="width: 550px; height: 400px;"></div> 
+                        <div id="us3" style="width: 100%; height: 400px;"></div> 
                         <div class="clearfix">&nbsp;</div>
 
                         <input type="hidden" class="form-control" name="latitudeName" id="us3-lat"  value="<?= $row->latitude ?>" />

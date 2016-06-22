@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
-
-
 use Illuminate\Database\Eloquent\Model;
 use Carbon;
+
+  /**
+   * model for showing calamiteiten
+   */
 
 class calamiteiten extends Model
 {
